@@ -10,7 +10,18 @@ namespace rf
 	static const float PI = 3.141592654f;
 	
 	//
+	// In a tilemap, gets the coord of the top-left corner of the tile where a given position is
+	// The size of each tile must also be given. This only works with axis-aligned (straight rectangular) tiles
+	//
+	static sf::Vector2f Game::getTileCoordsDown(const sf::Vector2f& pos, const sf::Vector2f& tileSize)
+	{
+		return sf::Vector2f{ std::floor(pos.x / tileSize.x), std::floor(pos.y / tileSize.y) };
+	}
+	
+	//
 	// Zooms a given view on a given window by a given factor and re-center it on a given pixel relatively to the previous pixel
+	//
+	// Adapted from: https://github.com/SFML/SFML/wiki/Source%3A-Zoom-View-At-%28specified-pixel%29
 	//
 	static void zoomViewAtPixel(sf::View& view, sf::RenderWindow& win, float factor, const sf::Vector2i& pixel, const sf::Vector2f& prevPos)
 	{
@@ -25,6 +36,8 @@ namespace rf
 	// Calculates the points in a 2D array that approximate a line from p1 to p2
 	// The values in the "out" vector are true if they match the line path, false otherwise
 	// This uses the Bresenham's line algorithm
+	//
+	// Adapted from: http://rosettacode.org/wiki/Bitmap/Bresenham%27s_line_algorithm#C.2B.2B
 	//
 	static void getBresenhamLine(std::vector<std::vector<bool>>& grid, const sf::Vector2f& size, const sf::Vector2f& p1, const sf::Vector2f& p2)
 	{
