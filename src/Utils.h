@@ -66,14 +66,14 @@ namespace rf
 		
 		for(int y = 0; y < size.y; ++y)
 		{
-			out.push_back(std::vector<bool>());
+			grid.push_back(std::vector<bool>());
 			for(int x = 0; x < size.x; ++x)
-				out[y].push_back(false);
+				grid[y].push_back(false);
 		}
 
 		for(int x = static_cast<int>(p1.x); x <= maxX; x++)
 		{		
-			(steep) ? out[x][y] = true : out[y][x] = true;
+			(steep) ? grid[x][y] = true : out[y][x] = true;
 
 			error -= dy;
 			if(error < 0)
@@ -82,7 +82,5 @@ namespace rf
 				error += dx;
 			}
 		}
-		
-		return out;
 	}
 }
